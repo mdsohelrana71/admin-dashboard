@@ -106,13 +106,37 @@ MAIL_PASSWORD=your_app_password
 
 ## 📁 Project Structure
 
-## 🤝 Contact
+```
+admin-dashboard/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   └── Middleware/
+│   ├── Models/
+│   └── Notifications/
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── resources/
+│   └── views/
+│       ├── admin/
+│       ├── auth/
+│       └── layouts/
+├── routes/
+│   └── web.php
+├── public/
+└── .env.example
+```
 
-**Fayaz Ahmed Saand**
+## 💛 Contact
+
+**Fayaz Ahmed Saand** — Full Stack Web Developer
+
 - 📧 Email: fayazahmedsaand93@gmail.com
-- 💼 Fiverr: [@fayazahmed13](https://fiverr.com/fayazahmed13)
-- 🌐 GitHub: [fayazahmedsaand123](https://github.com/fayazahmedsaand123)
-
+- 🎨 Fiverr: [@fayazahmed13](https://www.fiverr.com/fayazahmed13)
+- 💼 Upwork: [Fayaz Ahmed](https://www.upwork.com/freelancers/fayazahmed)
+- 🌐 Freelancer: [@fayazahmeds9](https://www.freelancer.com/u/fayazahmeds9)
+- 🐙 GitHub: [fayazahmedsaand123](https://github.com/fayazahmedsaand123)
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
