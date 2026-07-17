@@ -4,7 +4,8 @@ A professional Admin Dashboard built with Laravel 12, featuring role-based authe
 
 ## 📸 Screenshots
 
-> Add your screenshots here
+> <img width="1911" height="906" alt="Screenshot 2026-07-09 085732" src="https://github.com/user-attachments/assets/215f96dd-38f1-4977-b7a5-f0716cb1a189" />
+
 
 ## ✨ Features
 
