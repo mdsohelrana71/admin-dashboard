@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,17 +10,28 @@
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1534/1534938.png" type="image/png">
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #f0f2f5; font-family: 'Segoe UI', sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
         .sidebar {
             width: 260px;
             min-height: 100vh;
             background: #1e2a3a;
             position: fixed;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             overflow-y: auto;
             z-index: 100;
         }
+
         .sidebar .brand {
             padding: 22px 20px;
             color: #fff;
@@ -30,6 +42,7 @@
             align-items: center;
             gap: 10px;
         }
+
         .sidebar .section-title {
             padding: 15px 20px 5px;
             color: #607d8b;
@@ -37,6 +50,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
         .sidebar a {
             display: flex;
             align-items: center;
@@ -47,18 +61,29 @@
             font-size: 14px;
             transition: all 0.2s;
         }
-        .sidebar a:hover, .sidebar a.active {
+
+        .sidebar a:hover,
+        .sidebar a.active {
             background: #2d3f54;
             color: #fff;
             border-left: 3px solid #4e9af1;
         }
-        .sidebar a i { width: 18px; text-align: center; }
+
+        .sidebar a i {
+            width: 18px;
+            text-align: center;
+        }
+
         .sidebar .divider {
             border-top: 1px solid #2d3f54;
             margin: 8px 0;
         }
-        .main-content { margin-left: 260px; }
-        .topbar { 
+
+        .main-content {
+            margin-left: 260px;
+        }
+
+        .topbar {
             background: #fff;
             padding: 14px 25px;
             border-bottom: 1px solid #e2e8f0;
@@ -69,14 +94,24 @@
             top: 0;
             z-index: 99;
         }
+
         .stat-card {
             border-radius: 12px;
             padding: 22px;
             color: #fff;
             margin-bottom: 20px;
         }
-        .stat-card h6 { opacity: 0.85; font-size: 13px; }
-        .stat-card h2 { font-size: 36px; font-weight: bold; }
+
+        .stat-card h6 {
+            opacity: 0.85;
+            font-size: 13px;
+        }
+
+        .stat-card h2 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
         .stat-icon {
             font-size: 40px;
             opacity: 0.3;
@@ -85,6 +120,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="sidebar">
         <div class="brand">
@@ -95,6 +131,12 @@
         <div class="section-title">Main</div>
         <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
             <i class="fas fa-home"></i> Dashboard
+        </a>
+
+        <div class="divider"></div>
+        <div class="section-title">Product Management</div>
+        <a href="{{ route('admin.product-brands.index') }}" class="{{ request()->routeIs('admin.product-brands.index') ? 'active' : '' }}">
+            <i class="fas fa-tags"></i> Brands
         </a>
 
         <div class="divider"></div>
@@ -130,12 +172,12 @@
         </a>
         <a href="{{ route('admin.security') }}" class="{{ request()->routeIs('admin.security') ? 'active' : '' }}">
             <i class="fas fa-lock"></i> Security
-        </a>    
+        </a>
         <div class="divider"></div>
         <div class="section-title">Account</div>
         <a href="{{ route('admin.profile') }}" class="{{ request()->routeIs('admin.profile') ? 'active' : '' }}">
             <i class="fas fa-user-circle"></i> My Profile
-        </a>    
+        </a>
         <form method="POST" action="{{ route('logout') }}" style="margin:0">
             @csrf
             <button type="submit" style="background:none;border:none;width:100%;text-align:left;display:flex;align-items:center;gap:12px;padding:11px 20px;color:#e53e3e;font-size:14px;cursor:pointer;">
@@ -157,15 +199,15 @@
                     <a href="{{ route('admin.notifications') }}" class="text-muted position-relative">
                         <i class="fas fa-bell fs-5"></i>
                         @php
-                            $lastRead = session('notifications_read_at');
-                            if ($lastRead) {
-                                $notifCount = \App\Models\User::where('created_at', '>', $lastRead)->count();
-                            } else {
-                                $notifCount = \App\Models\User::where('created_at', '>=', now()->subDays(1))->count();
-                            }
+                        $lastRead = session('notifications_read_at');
+                        if ($lastRead) {
+                        $notifCount = \App\Models\User::where('created_at', '>', $lastRead)->count();
+                        } else {
+                        $notifCount = \App\Models\User::where('created_at', '>=', now()->subDays(1))->count();
+                        }
                         @endphp
                         @if($notifCount > 0)
-                            <span style="
+                        <span style="
                                 position: absolute;
                                 top: -8px;
                                 right: -8px;
@@ -184,63 +226,66 @@
                     </a>
                 </div>
 
-            <!-- User Dropdown -->
-            <div class="dropdown">
-                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark" data-bs-toggle="dropdown">
-                    @if(auth()->user()->profile_photo)
+                <!-- User Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center gap-2 text-decoration-none text-dark" data-bs-toggle="dropdown">
+                        @if(auth()->user()->profile_photo)
                         <img src="{{ asset('uploads/profiles/' . auth()->user()->profile_photo) }}"
                             style="width:35px;height:35px;border-radius:50%;object-fit:cover;">
-                    @else
+                        @else
                         <div style="width:35px;height:35px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:50%;display:flex;align-items:center;justify-content:center;">
                             <span style="color:#fff;font-size:14px;font-weight:bold;">
                                 {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                             </span>
                         </div>
-                    @endif
-                    <span class="small fw-bold">{{ auth()->user()->name }}</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow">
-                    <li>
-                        <div class="px-3 py-2 border-bottom">
-                            <div class="fw-bold">{{ auth()->user()->name }}</div>
-                            <div class="text-muted small">{{ auth()->user()->email }}</div>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('admin.profile') }}">
-                            <i class="fas fa-user-circle me-2"></i> My Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('admin.settings') }}">
-                            <i class="fas fa-cog me-2"></i> Settings
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('admin.security') }}">
-                            <i class="fas fa-lock me-2"></i> Security
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button class="dropdown-item text-danger">
-                                <i class="fas fa-sign-out-alt me-2"></i> Logout
-                            </button>
-                        </form>
-                    </li>
-                </ul>
+                        @endif
+                        <span class="small fw-bold">{{ auth()->user()->name }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow">
+                        <li>
+                            <div class="px-3 py-2 border-bottom">
+                                <div class="fw-bold">{{ auth()->user()->name }}</div>
+                                <div class="text-muted small">{{ auth()->user()->email }}</div>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('admin.profile') }}">
+                                <i class="fas fa-user-circle me-2"></i> My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('admin.settings') }}">
+                                <i class="fas fa-cog me-2"></i> Settings
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('admin.security') }}">
+                                <i class="fas fa-lock me-2"></i> Security
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="dropdown-item text-danger">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
+        <div class="p-4">
+            @yield('content')
+        </div>
     </div>
-    <div class="p-4">
-        @yield('content')
-    </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-@yield('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @yield('scripts')
 </body>
+
 </html>
